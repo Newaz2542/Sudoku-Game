@@ -7,6 +7,6 @@
 
 <BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.GridController">
    <top>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="ClickME" BorderPane.alignment="CENTER" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addNum" text="ClickME" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>

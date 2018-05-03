@@ -27,6 +27,7 @@ public class Main extends Application {
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
 		stage.setTitle("GridShow");
+		stage.setFullScreen(true);
 		stage.show();
 		}
 		catch(IOException e) {
