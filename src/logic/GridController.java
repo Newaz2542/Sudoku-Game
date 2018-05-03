@@ -11,80 +11,84 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-
 public class GridController {
 	@FXML
 	BorderPane pane;
 
-	private List<SaveGrid> numGrid;
 	private Table table;
 	private RandomNumber random;
-	private GridPane mainGrid;
-	private GridPane boxGrid;
+	private GridPane gridA;
+	List<GridPane> gridB = new ArrayList<GridPane>();
+	List<Label> labelList = new ArrayList<Label>();
 
 	@FXML
 	public void initialize() {
 		table = new Table(3); // 3 or 4
 		random = new RandomNumber(table);
 		random.run();
-		mainGrid = createMainGrid(3);// EmtyGrid
 
-		// something.add(label2, 1, 0);
-		// something.add(label3, 6, 6);
-		pane.setCenter(mainGrid);
-		// for(int i = 0;i < table.getSize();i++) {
-		// for(int j = 0;j < table.getSize();j++) {
-		// }
-		// }
+		gridA = createGridA(3);
+		pane.setCenter(gridA);
+		listOfGridB(3);
 	}
 
-	// Create 3*3
-	public GridPane createMainGrid(int num) {
-		GridPane gridpane = new GridPane();
+	public GridPane createGridA(int num) {
+		GridPane pane = new GridPane();
 		for (int i = 0; i < num; i++) {
 			ColumnConstraints column = new ColumnConstraints(225);
-			gridpane.getColumnConstraints().add(column);
+			pane.getColumnConstraints().add(column);
 			RowConstraints rows = new RowConstraints(225);
-			gridpane.getRowConstraints().add(rows);
-			
-
+			pane.getRowConstraints().add(rows);
 		}
-		gridpane.setGridLinesVisible(true);
-		return gridpane;
+		pane.setGridLinesVisible(true);
+		return pane;
 	}
 
-	// create box
-	public GridPane createBox(int num) {
-		boxGrid = new GridPane();
-		for (int i = 0; i < num; i++) {
-			
-			ColumnConstraints column = new ColumnConstraints(75);
-			boxGrid.getColumnConstraints().add(column);
-			RowConstraints rows = new RowConstraints(75);
-			boxGrid.getRowConstraints().add(rows);
+	public void listOfGridB(int num) {
+		for (int i = 0; i < table.getList().size(); i++) {
+			gridB.add(new GridPane());
 		}
-		boxGrid.setGridLinesVisible(true);
-		return boxGrid;
-	}
 
-	public void addNum(ActionEvent ac) {
-		SaveGrid[] numberGrid = SaveGrid.values();
-		Label text = new Label("FUCK");
-		List<Integer> ha = new ArrayList<Integer>();
+		for (int i = 0; i < table.getList().size(); i++) {
+			GridPane x = gridB.get(i);
+			for (int a = 0; a < num; a++) {
+				ColumnConstraints column = new ColumnConstraints(75);
+				x.getColumnConstraints().add(column);
+				RowConstraints rows = new RowConstraints(75);
+				x.getRowConstraints().add(rows);
+			}
+			x.setGridLinesVisible(true);
+		}
+
 		for (int i = 0; i < table.getList().size(); i++) {
 			for (int j = 0; j < table.getList().size(); j++) {
 				int number = table.getList().get(i).getList().get(j).getNumber();
-				ha.add(number);
-				
-			}
-			
-		}
-		for(int a = 0 ; a < table.getSize(); a++) {
-			for(int b = 0 ; b < table.getSize();b++) {
-				mainGrid.add(createBox(table.getSize()), a, b);
+				labelList.add(new Label(Integer.toString(number)));
 			}
 		}
-		
+
+		int fuck = 0;
+		for (int a = 0; a < table.getSize(); a++) {
+			for (int b = 0; b < table.getSize(); b++) {
+				for (int i = 0; i < 9; i++) {
+					gridB.get((3 * a) + b).add(labelList.get(fuck), (i % 3), (i / 3));
+					System.out.println("Number is : " + (fuck));
+					fuck++;
+				}
+
+			}
+		}
+
+	}
+
+	public void handleSomething(ActionEvent ac) {
+		int fuck = 0;
+		for (int a = 0; a < table.getSize(); a++) {
+			for (int b = 0; b < table.getSize(); b++) {
+				gridA.add(gridB.get(fuck), b, a);
+				fuck++;
+			}
+		}
 	}
 
 }
