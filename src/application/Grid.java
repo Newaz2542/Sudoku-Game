@@ -3,6 +3,8 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -119,6 +121,22 @@ public class Grid {
 
 			}
 		}
+	}
+	
+	public Node getNodeByRowColumnIndex(final int row, final int column) {
+		Node result = null;
+		GridPane gridPane = gridB.get((table.getSize()*row)+column);
+		for (int i = 0; i < gridB.size(); i++) {
+			for (int j = 1; j < gridB.size()+1;j++) {
+				//System.out.println(gridPane.getRowIndex(gridPane.getChildren().get(j)) == row && gridPane.getColumnIndex(gridPane.getChildren().get(j)) == column);
+				if (gridPane.getRowIndex(gridPane.getChildren().get(j)) == row && gridPane.getColumnIndex(gridPane.getChildren().get(j)) == column) {
+					result = gridPane.getChildren().get(j);
+					break;
+				}
+			}
+		}
+		return result;
+		
 	}
 
 }

@@ -29,7 +29,7 @@
          <children>
             <BorderPane layoutX="63.0" layoutY="29.0" prefHeight="153.0" prefWidth="582.0">
                <left>
-                  <Button mnemonicParsing="false" text="Hint" BorderPane.alignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#createSelect" text="Hint" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="50.0" />
                      </BorderPane.margin>
@@ -39,7 +39,7 @@
                   <Button mnemonicParsing="false" onAction="#handleDone" text="Done" BorderPane.alignment="CENTER" />
                </center>
                <right>
-                  <Button mnemonicParsing="false" text="ลืมปุ่มไร" BorderPane.alignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#createSelect" text="ลืมปุ่มไร" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets right="50.0" />
                      </BorderPane.margin>
