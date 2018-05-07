@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
-
 public class RandomNumber implements Runnable {
 
 	private Table table;
@@ -117,23 +115,9 @@ public class RandomNumber implements Runnable {
 	
 	public int undoCreateGrid(int numberGrid, int size, int realSize) {
 		int remainder = numberGrid % realSize;
-		if (remainder == 1) {
-			table.clear(numberGrid - remainder);
-			createRandomSet(createNumberSet(size), numberGrid - remainder, size);
-		}
-		if (remainder == 2) {
-			table.clear(numberGrid - remainder);
-			table.clear(numberGrid - (remainder - 1));
-			createRandomSet(createNumberSet(size), numberGrid - remainder, size);
-			createRandomSet(createNumberSet(size), numberGrid - (remainder - 1), size);
-		}
-		if (remainder == 3) {
-			table.clear(numberGrid - remainder);
-			table.clear(numberGrid - (remainder - 1));
-			table.clear(numberGrid - (remainder - 2));
-			createRandomSet(createNumberSet(size), numberGrid - remainder, size);
-			createRandomSet(createNumberSet(size), numberGrid - (remainder - 1), size);
-			createRandomSet(createNumberSet(size), numberGrid - (remainder - 2), size);
+		for(int i = 0 ;i < remainder ;i++) {
+			table.clear(numberGrid - remainder + i);
+			createRandomSet(createNumberSet(size),numberGrid-remainder+i,size);
 		}
 		return -1;
 	}
